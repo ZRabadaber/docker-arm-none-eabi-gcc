@@ -8,7 +8,7 @@ RUN apt update && \
   libncurses5 libncurses5-dev \
   libncursesw5 libncursesw5-dev \
   libssl-dev python3.8\
-  wget xz-utils cmake git ninja-build \
+  wget xz-utils cmake git ninja-build meson openocd gdb-multiarch default-jre \
   && rm -rf /var/cache/apk/*
 
 # Download and configure the toolchain
