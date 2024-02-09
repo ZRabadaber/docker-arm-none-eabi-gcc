@@ -18,6 +18,6 @@ RUN cd /opt/ && tar -xpJf ${toolchain} && rm /opt/${toolchain}
 
 ENV PATH "/opt/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin:$PATH"
 
-WORKDIR /workdir
+WORKDIR /workspace
 
 CMD [ "/bin/bash" ]
