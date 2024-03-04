@@ -1,15 +1,10 @@
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 
-# Install any needed packages specified in requirements.txt
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Moscow
-RUN apt update && \
-  apt install -yq \
-  libncurses5 libncurses5-dev \
-  libncursesw5 libncursesw5-dev \
-  libssl-dev python3.8\
-  wget xz-utils cmake git ninja-build meson openocd gdb-multiarch default-jre \
-  && rm -rf /var/cache/apk/*
+RUN apt-get update && \
+  apt-get install -yq \
+  wget build-essential xz-utils cmake git ninja-build meson openocd gdb-multiarch default-jre
 
 # Download and configure the toolchain
 ARG toolchain=arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz
@@ -18,6 +13,15 @@ RUN cd /opt/ && tar -xpJf ${toolchain} && rm /opt/${toolchain}
 
 ENV PATH "/opt/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin:$PATH"
 
+ARG jlink=JLink_Linux_V794k_x86_64.deb
+COPY ${jlink} /tmp/
+RUN apt-get install -yq /tmp/${jlink}; exit 0
+RUN rm /tmp/${jlink}
+
+RUN apt-get clean \
+  && rm -rf /var/cache/apk/*
+
+USER ubuntu
 WORKDIR /workspace
 
 CMD [ "/bin/bash" ]
