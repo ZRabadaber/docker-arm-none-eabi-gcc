@@ -4,7 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Moscow
 RUN apt-get update && \
   apt-get install -yq \
-  wget build-essential xz-utils cmake git ninja-build meson openocd gdb-multiarch default-jre
+  wget build-essential xz-utils cmake git ninja-build meson openocd gdb-multiarch default-jre libfuse2
 
 # Download and configure the toolchain
 ARG toolchain=arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz
