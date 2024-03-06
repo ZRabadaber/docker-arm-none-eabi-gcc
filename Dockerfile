@@ -21,7 +21,9 @@ RUN rm /tmp/${jlink}
 RUN apt-get clean \
   && rm -rf /var/cache/apk/*
 
-USER ubuntu
+RUN useradd -ms /bin/bash vscode
+USER vscode
+
 WORKDIR /workspace
 
 CMD [ "/bin/bash" ]
