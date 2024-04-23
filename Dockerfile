@@ -7,11 +7,12 @@ RUN apt-get update && \
   wget build-essential xz-utils cmake git ninja-build meson openocd gdb-multiarch default-jre libfuse2
 
 # Download and configure the toolchain
-ARG toolchain=arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz
-COPY ${toolchain} /opt/
-RUN cd /opt/ && tar -xpJf ${toolchain} && rm /opt/${toolchain}
+ARG toolchain=_none
+ARG toolchainFile=${toolchain}.tar.xz
+COPY ${toolchainFile} /opt/
+RUN cd /opt/ && tar -xpJf ${toolchainFile} && rm /opt/${toolchainFile}
 
-ENV PATH "/opt/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin:$PATH"
+ENV PATH "/opt/${toolchain}/bin:$PATH"
 
 ARG jlink=JLink_Linux_V794k_x86_64.deb
 COPY ${jlink} /tmp/
