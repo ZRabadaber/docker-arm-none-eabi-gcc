@@ -12,7 +12,7 @@ ARG toolchainFile=${toolchain}.tar.xz
 COPY ${toolchainFile} /opt/
 RUN cd /opt/ && tar -xpJf ${toolchainFile} && rm /opt/${toolchainFile}
 
-ENV PATH "/opt/${toolchain}/bin:$PATH"
+ENV PATH="/opt/${toolchain}/bin:$PATH"
 
 ARG jlink=JLink_Linux_V794k_x86_64.deb
 COPY ${jlink} /tmp/
